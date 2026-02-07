@@ -1,0 +1,243 @@
+.step1-container {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: relative;
+}
+
+.exit-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--primary);
+  border: 2px solid var(--primary-dark);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 0 0 var(--primary-dark);
+  transition: all 0.2s;
+  z-index: 1000;
+}
+
+.exit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 var(--primary-dark);
+}
+
+.exit-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 var(--primary-dark);
+}
+
+.instruction {
+  margin: 20px 0;
+  font-size: 10px;
+  color: var(--primary-light);
+}
+
+.attempts-info {
+  margin: 15px 0;
+  font-size: 10px;
+  color: var(--text-color);
+}
+
+.cups-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin: 30px 0;
+  min-height: 120px;
+  align-items: center;
+}
+
+.cup {
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 0.3s;
+}
+
+.cup-body {
+  width: 60px;
+  height: 30px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cup-crescent {
+  width: 60px;
+  height: 30px;
+  background-color: #e74c3c;
+  border-radius: 100% 100% 0 0 / 200% 200% 0 0;
+  position: relative;
+  transform-origin: center bottom;
+  box-shadow: 0 3px 0 0 #c0392b, inset 0 -3px 6px rgba(0,0,0,0.3);
+  transition: transform 0.3s ease;
+  overflow: hidden;
+}
+
+.cup-crescent::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 60%);
+  border-radius: 100% 100% 0 0 / 200% 200% 0 0;
+}
+
+.cup.ping .cup-crescent {
+  transform: rotate(0deg);
+}
+
+.cup.tu .cup-crescent {
+  transform: rotate(180deg);
+  background-color: #e74c3c;
+  box-shadow: 0 3px 0 0 #c0392b, inset 0 3px 6px rgba(0,0,0,0.3);
+}
+
+.cup.throwing {
+  animation: throwAnimation 0.8s ease-in-out;
+}
+
+@keyframes throwAnimation {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-30px) rotate(180deg);
+  }
+  50% {
+    transform: translateY(5px) rotate(360deg);
+  }
+  60% {
+    transform: translateY(-10px) rotate(450deg);
+  }
+  70% {
+    transform: translateY(2px) rotate(540deg);
+  }
+  80% {
+    transform: translateY(-5px) rotate(630deg);
+  }
+  100% {
+    transform: translateY(0) rotate(720deg);
+  }
+}
+
+.cup.ping .cup-crescent {
+  transform: rotate(0deg);
+}
+
+.cup.tu .cup-crescent {
+  transform: rotate(180deg);
+}
+
+.result {
+  margin: 20px 0;
+  padding: 15px;
+  border: 3px solid var(--primary);
+  background-color: var(--container-bg);
+  animation: resultAppear 0.5s ease-out;
+}
+
+@keyframes resultAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.result-sheng {
+  border-color: var(--primary);
+  background-color: rgba(155, 89, 182, 0.2);
+}
+
+.result-xiao {
+  border-color: var(--primary-light);
+}
+
+.result-yin {
+  border-color: var(--primary);
+}
+
+.result-text {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: var(--primary);
+}
+
+.result-desc {
+  font-size: 8px;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+.no-attempts {
+  margin: 20px 0;
+  padding: 15px;
+  border: 3px solid var(--primary);
+  background-color: rgba(155, 89, 182, 0.2);
+  font-size: 10px;
+  color: var(--primary);
+  animation: shake 0.5s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.throw-button,
+.retry-button {
+  min-width: 120px;
+}
+
+@media (max-width: 480px) {
+  .cups-container {
+    gap: 20px;
+  }
+  
+  .cup {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .cup-face {
+    font-size: 24px;
+  }
+  
+  .buttons {
+    flex-direction: column;
+  }
+  
+  .throw-button,
+  .retry-button {
+    width: 100%;
+  }
+}

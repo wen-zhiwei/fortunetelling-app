@@ -1,0 +1,409 @@
+.step3-container {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: relative;
+}
+
+.exit-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--primary);
+  border: 2px solid var(--primary-dark);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 0 0 var(--primary-dark);
+  transition: all 0.2s;
+  z-index: 1000;
+}
+
+.exit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 var(--primary-dark);
+}
+
+.exit-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 var(--primary-dark);
+}
+
+.fortune-card {
+  margin: 30px 0;
+  padding: 30px;
+  border: 4px solid;
+  background-color: var(--container-bg);
+  animation: cardAppear 0.6s ease-out;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@keyframes cardAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.fortune-shang {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, rgba(155, 89, 182, 0.3), rgba(27, 27, 27, 0.95));
+}
+
+.fortune-zhong {
+  border-color: var(--primary-light);
+  background: linear-gradient(135deg, rgba(187, 125, 217, 0.3), rgba(27, 27, 27, 0.95));
+}
+
+.fortune-xia {
+  border-color: var(--primary);
+  background: linear-gradient(135deg, rgba(155, 89, 182, 0.3), rgba(27, 27, 27, 0.95));
+}
+
+.fortune-xia .fortune-header {
+  color: var(--primary);
+}
+
+.fortune-header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: var(--primary);
+  text-transform: uppercase;
+}
+
+.fortune-shang .fortune-header {
+  color: var(--primary);
+}
+
+.fortune-zhong .fortune-header {
+  color: var(--primary-light);
+}
+
+.fortune-xia .fortune-header {
+  color: var(--accent);
+}
+
+.fortune-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.fortune-message {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.message-text {
+  font-size: 12px;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  color: var(--text-color);
+}
+
+.affirmation {
+  font-size: 14px;
+  font-style: italic;
+  color: var(--primary);
+  margin: 15px 0;
+  padding: 10px 15px;
+  background-color: rgba(155, 89, 182, 0.1);
+  border: 2px solid var(--primary-light);
+  border-radius: 8px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  animation: affirmationAppear 0.8s ease-out;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.affirmation:hover {
+  background-color: rgba(155, 89, 182, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.affirmation.favorited {
+  background-color: rgba(255, 215, 0, 0.2);
+  border-color: #ffd700;
+  color: #d4af37;
+}
+
+.affirmation.favorited-animation {
+  animation: favoritedPulse 0.5s ease-in-out;
+}
+
+@keyframes affirmationAppear {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes favoritedPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes favoritePop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.favorite-icon {
+  display: inline-block;
+  font-size: 16px;
+  color: #ccc;
+  transition: all 0.3s ease;
+  margin-left: 8px;
+  font-style: normal;
+  vertical-align: middle;
+}
+
+.affirmation:hover .favorite-icon {
+  color: #ffd700;
+}
+
+.affirmation.favorited .favorite-icon {
+  color: #ffd700;
+  animation: favoritePop 0.3s ease-in-out;
+}
+
+.blessing-icon,
+.retry-icon {
+  font-size: 48px;
+  animation: float 2s ease-in-out infinite;
+  margin: 20px 0;
+}
+
+.trash-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.blessing-message {
+  animation: blessingAppear 0.8s ease-out;
+}
+
+@keyframes blessingAppear {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.blessing-text {
+  font-size: 14px;
+  color: var(--primary);
+  margin-bottom: 15px;
+}
+
+.blessing-detail {
+  font-size: 10px;
+  color: var(--primary-light);
+  line-height: 1.6;
+}
+
+.trash-container {
+  margin-top: 20px;
+}
+
+.trash-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 80px;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s;
+}
+
+.trash-button:hover {
+  transform: scale(1.1);
+}
+
+.trash-button:active {
+  transform: scale(0.95);
+}
+
+.trash-icon {
+  font-size: 64px;
+  animation: trashPulse 2s ease-in-out infinite;
+  cursor: pointer;
+}
+
+@keyframes trashPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.thrown-away {
+  animation: throwAwayAnimation 1s ease-out;
+}
+
+@keyframes throwAwayAnimation {
+  0% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(30px) scale(0.9);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(100px) scale(0.5) rotate(45deg);
+  }
+}
+
+.trash-animation {
+  font-size: 64px;
+  animation: trashFall 1s ease-out forwards;
+}
+
+@keyframes trashFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(100px) rotate(360deg);
+  }
+}
+
+.thrown-text {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--accent);
+}
+
+.fortune-card.completed {
+  opacity: 0.7;
+}
+
+.action-buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.receive-button,
+.retry-button,
+.restart-button {
+  min-width: 150px;
+}
+
+.receive-button {
+  background-color: var(--primary);
+  border-color: var(--primary-light);
+}
+
+.retry-button {
+  background-color: var(--primary-light);
+  border-color: var(--primary);
+}
+
+.restart-button {
+  background-color: var(--primary);
+  border-color: var(--primary-dark);
+}
+
+@media (max-width: 480px) {
+  .fortune-card {
+    padding: 20px;
+    min-height: 200px;
+  }
+  
+  .fortune-header {
+    font-size: 14px;
+  }
+  
+  .message-text {
+    font-size: 10px;
+  }
+  
+  .blessing-icon,
+  .retry-icon {
+    font-size: 36px;
+  }
+  
+  .trash-icon {
+    width: 30px;
+    height: 38px;
+  }
+  
+  .trash-icon::before {
+    width: 30px;
+    height: 26px;
+  }
+  
+  .trash-icon::after {
+    width: 22px;
+    height: 11px;
+    top: -8px;
+    left: 4px;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .receive-button,
+  .retry-button,
+  .restart-button {
+    width: 100%;
+  }
+}

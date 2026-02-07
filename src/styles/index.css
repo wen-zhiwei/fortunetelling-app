@@ -1,0 +1,54 @@
+/* 全局样式入口 */
+@import './pixel-font.css';
+@import './themes.css';
+
+.app {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.app-header {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+  margin-top: 40px;
+}
+
+.app-title {
+  font-size: 36px;
+  font-weight: bold;
+  color: var(--primary);
+  text-shadow: 3px 3px 0 var(--primary-dark);
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  letter-spacing: 4px;
+  animation: titlePulse 3s ease-in-out infinite;
+}
+
+@keyframes titlePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+/* 确保主题应用到body */
+body[data-theme="purple"] {
+  background-color: #000000;
+}
+
+body[data-theme="gold"] {
+  background-color: #000000;
+}
+
+body[data-theme="green"] {
+  background-color: #000000;
+}

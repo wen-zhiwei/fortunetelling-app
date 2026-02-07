@@ -1,0 +1,72 @@
+/* 主题颜色变量 */
+
+/* 紫色赛博主题 */
+[data-theme="purple"] {
+  --primary: #ff00ff;
+  --primary-light: #ff66ff;
+  --primary-dark: #cc00cc;
+  --secondary: #9b59b6;
+  --accent: #00ffff;
+  --text-color: #ffffff;
+  --button-bg: #9b59b6;
+  --button-border: #ff00ff;
+  --button-shadow: rgba(255, 0, 255, 0.5);
+  --container-bg: rgba(10, 0, 20, 0.95);
+  background-color: #0a0014;
+  background-image: 
+    linear-gradient(45deg, rgba(155, 89, 182, 0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(155, 89, 182, 0.1) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(155, 89, 182, 0.1) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(155, 89, 182, 0.1) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* 金色赛博主题 */
+[data-theme="gold"] {
+  --primary: #ffd700;
+  --primary-light: #ffff66;
+  --primary-dark: #ccac00;
+  --secondary: #f39c12;
+  --accent: #ff4500;
+  --text-color: #ffffff;
+  --button-bg: #f39c12;
+  --button-border: #ffd700;
+  --button-shadow: rgba(255, 215, 0, 0.5);
+  --container-bg: rgba(20, 10, 0, 0.95);
+  background-color: #140a00;
+  background-image: 
+    linear-gradient(45deg, rgba(243, 156, 18, 0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(243, 156, 18, 0.1) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(243, 156, 18, 0.1) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(243, 156, 18, 0.1) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* 绿色赛博主题 */
+[data-theme="green"] {
+  --primary: #00ff00;
+  --primary-light: #66ff66;
+  --primary-dark: #00cc00;
+  --secondary: #27ae60;
+  --accent: #ff00ff;
+  --text-color: #ffffff;
+  --button-bg: #27ae60;
+  --button-border: #00ff00;
+  --button-shadow: rgba(0, 255, 0, 0.5);
+  --container-bg: rgba(0, 20, 10, 0.95);
+  background-color: #00140a;
+  background-image: 
+    linear-gradient(45deg, rgba(39, 174, 96, 0.1) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(39, 174, 96, 0.1) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(39, 174, 96, 0.1) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(39, 174, 96, 0.1) 75%);
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* 应用主题到根元素 */
+body {
+  transition: background-color 0.3s ease;
+}

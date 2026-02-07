@@ -1,0 +1,340 @@
+.step2-container {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  position: relative;
+}
+
+.exit-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--primary);
+  border: 2px solid var(--primary-dark);
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 0 0 var(--primary-dark);
+  transition: all 0.2s;
+  z-index: 1000;
+}
+
+.exit-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 0 var(--primary-dark);
+}
+
+.exit-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 0 var(--primary-dark);
+}
+
+.shake-instruction {
+  margin: 20px 0;
+}
+
+.shake-instruction p {
+  font-size: 10px;
+  color: var(--primary-light);
+  line-height: 1.6;
+}
+
+.shake-area {
+  margin: 40px 0;
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bamboo-tube {
+  width: 100px;
+  height: 200px;
+  background-color: #8d6e63;
+  border: 4px solid #6d4c41;
+  border-radius: 8px 8px 12px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 0 8px 0 0 #5d4037, inset 0 0 20px rgba(0,0,0,0.3);
+  transition: all 0.3s;
+  overflow: hidden;
+}
+
+.bamboo-tube::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background-color: #a1887f;
+  border-bottom: 2px solid #6d4c41;
+}
+
+.bamboo-tube::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background-color: #a1887f;
+  border-top: 2px solid #6d4c41;
+}
+
+.bamboo-tube-content {
+  width: 80%;
+  height: 70%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.bamboo-sticks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  height: 100%;
+}
+
+.stick {
+  width: 6px;
+  height: 120px;
+  background-color: #d7ccc8;
+  border-radius: 3px;
+  position: relative;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  animation: float 3s ease-in-out infinite;
+}
+
+.stick:nth-child(1) { animation-delay: 0s; }
+.stick:nth-child(2) { animation-delay: 0.3s; }
+.stick:nth-child(3) { animation-delay: 0.6s; }
+.stick:nth-child(4) { animation-delay: 0.9s; }
+.stick:nth-child(5) { animation-delay: 1.2s; }
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+}
+
+.bamboo-tube.shaking {
+  animation: shakeAnimation 0.5s ease-in-out infinite;
+}
+
+@keyframes shakeAnimation {
+  0%, 100% {
+    transform: translateX(0) translateY(0) rotate(0deg);
+  }
+  25% {
+    transform: translateX(-15px) translateY(-5px) rotate(-8deg);
+  }
+  50% {
+    transform: translateX(15px) translateY(5px) rotate(8deg);
+  }
+  75% {
+    transform: translateX(-10px) translateY(-5px) rotate(-4deg);
+  }
+}
+
+.bamboo-tube.revealed {
+  animation: revealAnimation 1s ease-out;
+}
+
+@keyframes revealAnimation {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.fortune-reveal {
+  font-size: 48px;
+  font-weight: bold;
+  color: var(--primary);
+  animation: fortuneAppear 0.8s ease-out;
+}
+
+@keyframes fortuneAppear {
+  0% {
+    transform: scale(0) rotate(0deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.3) rotate(180deg);
+  }
+  100% {
+    transform: scale(1) rotate(360deg);
+    opacity: 1;
+  }
+}
+
+.fortune-shang {
+  color: var(--primary);
+}
+
+.fortune-zhong {
+  color: var(--primary-light);
+}
+
+.fortune-xia {
+  color: var(--accent);
+}
+
+.shaking-indicator {
+  margin-top: 20px;
+  font-size: 12px;
+  color: var(--primary-light);
+  animation: blink 1s ease-in-out infinite;
+}
+
+@keyframes blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.result-display {
+  margin: 30px 0;
+  padding: 20px;
+  border: 4px solid;
+  background-color: var(--container-bg);
+  animation: resultSlideIn 0.6s ease-out;
+}
+
+@keyframes resultSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-shang {
+  border-color: var(--primary);
+  background-color: rgba(155, 89, 182, 0.2);
+}
+
+.result-zhong {
+  border-color: var(--primary-light);
+  background-color: rgba(187, 125, 217, 0.2);
+}
+
+.result-xia {
+  border-color: var(--accent);
+  background-color: rgba(231, 76, 60, 0.2);
+}
+
+.result-label {
+  font-size: 10px;
+  margin-bottom: 10px;
+  color: var(--text-color);
+}
+
+.result-type {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.result-shang .result-type {
+  color: var(--primary);
+}
+
+.result-zhong .result-type {
+  color: var(--primary-light);
+}
+
+.result-xia .result-type {
+  color: var(--accent);
+}
+
+.hint {
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px dashed var(--primary);
+  background-color: rgba(155, 89, 182, 0.1);
+}
+
+.hint p {
+  font-size: 9px;
+  color: var(--primary-light);
+  line-height: 1.6;
+}
+
+.draw-fortune-button {
+  margin: 30px 0;
+  padding: 15px 40px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background-color: var(--primary);
+  border: 4px solid var(--primary-dark);
+  box-shadow: 0 6px 0 0 var(--primary-dark);
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.draw-fortune-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 0 var(--primary-dark);
+}
+
+.draw-fortune-button:active {
+  transform: translateY(4px);
+  box-shadow: 0 2px 0 0 var(--primary-dark);
+}
+
+.draw-fortune-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 6px 0 0 var(--primary-dark);
+}
+
+@media (max-width: 480px) {
+  .shake-icon {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .shake-symbol,
+  .fortune-reveal {
+    font-size: 36px;
+  }
+  
+  .result-type {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,21 @@
+.language-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  font-size: 10px;
+  padding: 0;
+  z-index: 1000;
+  border-radius: 0;
+}
+
+@media (max-width: 480px) {
+  .language-toggle {
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    font-size: 8px;
+  }
+}

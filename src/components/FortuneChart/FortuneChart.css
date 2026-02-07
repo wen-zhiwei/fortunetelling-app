@@ -1,0 +1,221 @@
+.fortune-chart {
+  width: 100%;
+}
+
+.fortune-chart h3 {
+  font-size: 16px;
+  color: var(--primary);
+  text-shadow: 1px 1px 0 var(--primary-dark);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.chart-content {
+  position: relative;
+}
+
+.chart-pie {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.pie-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.pie-chart {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 4px solid var(--primary-dark);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.3);
+}
+
+.pie-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-light);
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+.pie-slice {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s ease-out;
+  transform-origin: center;
+  clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%);
+}
+
+.pie-slice.shang {
+  background-color: var(--primary);
+  box-shadow: inset 2px 2px 0 rgba(255, 255, 255, 0.3);
+}
+
+.pie-slice.shang.full {
+  clip-path: circle(50% at 50% 50%);
+  transform: none;
+}
+
+
+.pie-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: var(--container-bg);
+  border: 3px solid var(--primary-dark);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 3px 3px 0 rgba(0, 0, 0, 0.3);
+}
+
+.pie-percentage {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--primary);
+  text-shadow: 1px 1px 0 var(--primary-dark);
+  line-height: 1;
+}
+
+.pie-label {
+  font-size: 14px;
+  color: var(--text-color);
+  margin-top: 5px;
+}
+
+.chart-summary {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 15px;
+  border: 2px solid var(--primary);
+  border-radius: 8px;
+  background-color: var(--container-bg);
+  flex-wrap: wrap;
+}
+
+.summary-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.summary-label {
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.summary-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: var(--primary);
+  text-shadow: 1px 1px 0 var(--primary-dark);
+}
+
+.chart-empty {
+  text-align: center;
+  padding: 40px;
+  color: var(--primary-light);
+  font-size: 14px;
+  border: 2px dashed var(--primary-light);
+  border-radius: 8px;
+  margin-top: 20px;
+}
+
+/* 像素风效果 */
+.pie-chart {
+  position: relative;
+}
+
+.pie-chart::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .pie-container {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .pie-chart {
+    width: 160px;
+    height: 160px;
+  }
+  
+  .pie-center {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .pie-percentage {
+    font-size: 20px;
+  }
+  
+  .pie-label {
+    font-size: 12px;
+  }
+  
+  .chart-summary {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .fortune-chart h3 {
+    font-size: 14px;
+  }
+  
+  .pie-container {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .pie-chart {
+    width: 140px;
+    height: 140px;
+  }
+  
+  .pie-center {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .pie-percentage {
+    font-size: 18px;
+  }
+  
+  .pie-label {
+    font-size: 10px;
+  }
+  
+  .chart-summary {
+    flex-direction: column;
+    gap: 10px;
+  }
+}
