@@ -82,7 +82,6 @@ export const Step3Result: React.FC<Step3ResultProps> = ({ fortune, onRetry, onRe
       <button className="exit-button" onClick={onRestart}>
         ×
       </button>
-      <h2>{t('step3.human.title')}</h2>
 
       <div className={`fortune-card fortune-${fortune} ${isReceived || isThrownAway ? 'completed' : ''}`}>
         <div className="fortune-header">
