@@ -75,7 +75,6 @@ export const HistoryPage: React.FC<HistoryPageProps> = ({ onBack }) => {
         <button className="back-button" onClick={onBack}>
           ×
         </button>
-        <h2>好运记录</h2>
       </div>
 
       <div className="time-range-selector">
