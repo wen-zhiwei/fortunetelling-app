@@ -89,7 +89,6 @@ const translations: Record<Language, Record<string, string>> = {
     // 收藏
     'favorites.empty': '暂无收藏',
     'favorites.emptyHint': '点击五角星（☆）即可收藏喜欢的签文',
-    'button.remove': '删除',
   },
   en: {
     // Common
@@ -101,7 +100,7 @@ const translations: Record<Language, Record<string, string>> = {
     'button.back': 'Back',
     'button.exit': 'Exit',
     'button.favorite': 'Favorite',
-    'button.remove': 'Remove',   // Step 1: Throw Cups
+
     'step1.title': 'Step 1: Throw Cups',
     'step1.instruction': 'Click to throw the cups',
     'step1.attempts': 'Attempts Left',

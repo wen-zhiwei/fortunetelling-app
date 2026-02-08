@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { FortuneType } from '../../utils/fortune';
 import { getRandomAffirmation } from '../../utils/affirmations';
-import { addFavorite, isFavorite, removeFavorite, getFavorites } from '../../utils/favorites';
+import { addFavorite, removeFavorite, getFavorites } from '../../utils/favorites';
 import './Step3Result.css';
 
 interface Step3ResultProps {
