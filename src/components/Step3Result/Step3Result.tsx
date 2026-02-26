@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '../../contexts/LanguageContext';
 import { FortuneType } from '../../utils/fortune';
-import { getRandomAffirmation } from '../../utils/affirmations';
+import { getRandomAffirmation, getRandomAffirmationSync } from '../../utils/affirmations';
 import { addFavorite, removeFavorite, getFavorites } from '../../utils/favorites';
 import './Step3Result.css';
 
@@ -21,16 +21,33 @@ export const Step3Result: React.FC<Step3ResultProps> = ({ fortune, onRetry, onRe
   const [isFavorited, setIsFavorited] = useState(false);
 
   useEffect(() => {
-    const zhAffirmation = getRandomAffirmation(fortune, 'zh');
-    const enAffirmation = getRandomAffirmation(fortune, 'en');
-    setCurrentAffirmation({ zh: zhAffirmation, en: enAffirmation });
+    const loadAffirmations = async () => {
+      try {
+        // 使用同步版本获取当前语言的肯定语（立即显示）
+        const displayAffirmation = getRandomAffirmationSync(fortune, language as 'zh' | 'en');
+        setAffirmation(displayAffirmation);
+        
+        // 异步获取中英文肯定语（用于收藏）
+        const zhAffirmation = await getRandomAffirmation(fortune, 'zh');
+        const enAffirmation = await getRandomAffirmation(fortune, 'en');
+        setCurrentAffirmation({ zh: zhAffirmation, en: enAffirmation });
+      } catch (error) {
+        console.error('Error loading affirmations:', error);
+        // 失败时使用同步版本
+        const zhAffirmation = getRandomAffirmationSync(fortune, 'zh');
+        const enAffirmation = getRandomAffirmationSync(fortune, 'en');
+        setCurrentAffirmation({ zh: zhAffirmation, en: enAffirmation });
+        
+        const displayAffirmation = getRandomAffirmationSync(fortune, language as 'zh' | 'en');
+        setAffirmation(displayAffirmation);
+      }
+      
+      // 重置收藏状态
+      setIsFav(false);
+      setIsFavorited(false);
+    };
     
-    const displayAffirmation = getRandomAffirmation(fortune, language as 'zh' | 'en');
-    setAffirmation(displayAffirmation);
-    
-    // 重置收藏状态
-    setIsFav(false);
-    setIsFavorited(false);
+    loadAffirmations();
   }, [fortune, language]);
 
   const handleFavorite = () => {

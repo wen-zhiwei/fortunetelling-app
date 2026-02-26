@@ -1,4 +1,6 @@
 import { FortuneType } from './fortune';
+import axios from 'axios';
+import { API_CONFIG, DEFAULT_API_SERVICE } from './apiConfig';
 
 export interface Affirmation {
   zh: string;
@@ -12,8 +14,8 @@ export interface AffirmationLibrary {
 }
 
 export const affirmationLibrary: AffirmationLibrary = {
-  // 上签：坚定自我，肯定当下能力
-  shang: [
+  // 下签：坚定自我，肯定当下能力
+  xia: [
     {
       zh: "我有能力创造理想的生活",
       en: "I have the power to create my ideal life"
@@ -100,8 +102,8 @@ export const affirmationLibrary: AffirmationLibrary = {
     }
   ],
   
-  // 下签：引导放下，聚焦复盘与行动
-  xia: [
+  // 上签：引导复盘，聚焦规划与行动
+  shang: [
     {
       zh: "放下过去，拥抱新开始",
       en: "Let go of the past, embrace new beginnings"
@@ -145,8 +147,156 @@ export const affirmationLibrary: AffirmationLibrary = {
   ]
 };
 
-export const getRandomAffirmation = (fortune: FortuneType, language: 'zh' | 'en'): string => {
+// 缓存机制
+export const cache: Record<string, { data: Affirmation; timestamp: number }> = {};
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24小时
+
+// 暴露到全局作用域，方便调试
+if (typeof window !== 'undefined') {
+  (window as any).affirmationCache = cache;
+}
+
+// 获取签文提示词
+const getPrompt = (fortune: FortuneType, language: 'zh' | 'en'): string => {
+  const prompts = {
+    zh: {
+      xia: "请生成一句5-15字的积极肯定语，风格坚定自我，肯定当下能力，适合作为下签的鼓励语。",
+      zhong: "请生成一句5-15字的积极肯定语，风格鼓励积累，接受慢成长，适合作为中签的鼓励语。",
+      shang: "请生成一句5-15字的积极肯定语，风格引导复盘，聚焦规划与行动，适合作为上签的引导语。"
+    },
+    en: {
+      xia: "Please generate a positive affirmation of 5-15 words, with a style that affirms oneself and current abilities, suitable as encouragement for a lower fortune.",
+      zhong: "Please generate a positive affirmation of 5-15 words, with a style that encourages accumulation and accepts slow growth, suitable as encouragement for a middle fortune.",
+      shang: "Please generate a positive affirmation of 5-15 words, with a style that guides reflection, focuses on planning and action, suitable as guidance for an upper fortune."
+    }
+  };
+  return prompts[language][fortune];
+};
+
+// 调用大语言模型API生成签文
+export const generateAffirmation = async (fortune: FortuneType, language: 'zh' | 'en'): Promise<string> => {
+  // 检查缓存
+  const cacheKey = `${fortune}_${language}`;
+  if (cache[cacheKey] && Date.now() - cache[cacheKey].timestamp < CACHE_DURATION) {
+    return cache[cacheKey].data[language];
+  }
+
+  try {
+    const prompt = getPrompt(fortune, language);
+    
+    if (DEFAULT_API_SERVICE === 'openai') {
+      const response = await axios.post(
+        API_CONFIG.openai.endpoint,
+        {
+          model: "gpt-3.5-turbo",
+          messages: [
+            {
+              role: "system",
+              content: "你是一个专业的签文生成助手，擅长创作积极正面的肯定语。"
+            },
+            {
+              role: "user",
+              content: prompt
+            }
+          ],
+          max_tokens: 50,
+          temperature: 0.7
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${API_CONFIG.openai.apiKey}`
+          }
+        }
+      );
+
+      const generatedText = response.data.choices[0].message.content.trim();
+      
+      // 更新缓存
+      const existingAffirmation = cache[cacheKey]?.data || { zh: "", en: "" };
+      cache[cacheKey] = {
+        data: {
+          ...existingAffirmation,
+          [language]: generatedText
+        },
+        timestamp: Date.now()
+      };
+
+      return generatedText;
+    } else if (DEFAULT_API_SERVICE === 'baidu') {
+      // 直接使用提供的完整API Key作为access_token
+      const accessToken = API_CONFIG.baidu.apiKey;
+
+      // 百度文心一言API调用
+      const response = await axios.post(
+        API_CONFIG.baidu.endpoint,
+        {
+          model: "ernie-3.5-8k",
+          messages: [
+            {
+              role: "user",
+              content: prompt
+            }
+          ],
+          temperature: 0.7
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${accessToken}`
+          }
+        }
+      );
+
+      const generatedText = response.data.choices[0].message.content.trim();
+      
+      // 更新缓存
+      const existingAffirmation = cache[cacheKey]?.data || { zh: "", en: "" };
+      cache[cacheKey] = {
+        data: {
+          ...existingAffirmation,
+          [language]: generatedText
+        },
+        timestamp: Date.now()
+      };
+
+      return generatedText;
+    } else {
+      // 其他API服务的实现
+      throw new Error(`Unsupported API service: ${DEFAULT_API_SERVICE}`);
+    }
+  } catch (error) {
+    console.error('Error generating affirmation:', error);
+    // 失败时使用本地库
+    return getLocalAffirmation(fortune, language);
+  }
+};
+
+// 从本地库获取签文
+const getLocalAffirmation = (fortune: FortuneType, language: 'zh' | 'en'): string => {
   const affirmations = affirmationLibrary[fortune];
   const randomIndex = Math.floor(Math.random() * affirmations.length);
   return affirmations[randomIndex][language];
+};
+
+// 获取随机签文（优先使用API生成）
+export const getRandomAffirmation = async (fortune: FortuneType, language: 'zh' | 'en'): Promise<string> => {
+  try {
+    return await generateAffirmation(fortune, language);
+  } catch (error) {
+    console.error('Error getting random affirmation:', error);
+    return getLocalAffirmation(fortune, language);
+  }
+};
+
+// 同步版本（用于需要立即返回的场景）
+export const getRandomAffirmationSync = (fortune: FortuneType, language: 'zh' | 'en'): string => {
+  // 检查缓存
+  const cacheKey = `${fortune}_${language}`;
+  if (cache[cacheKey] && Date.now() - cache[cacheKey].timestamp < CACHE_DURATION) {
+    return cache[cacheKey].data[language];
+  }
+  
+  // 使用本地库
+  return getLocalAffirmation(fortune, language);
 };

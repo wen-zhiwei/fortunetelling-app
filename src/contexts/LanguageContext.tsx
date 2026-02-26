@@ -33,8 +33,8 @@ const translations: Record<Language, Record<string, string>> = {
     'step1.result.xiao.desc': '梳理思路，重新投掷',
     'step1.result.yin.desc': '时机未到，稍作停顿',
     'step1.noAttempts': '次数用尽，请重新开始',
-    'step1.human.title': '请掷杯筊请示',
-    'step1.human.instruction': '梳理心中所想，确认前行方向',
+    'step1.human.title': '梳理心中所想，确认前行方向',
+    'step1.human.instruction': '请掷杯筊请示',
     'step1.human.attempts': '剩余机会',
     
     // 第二步：摇签
@@ -111,8 +111,8 @@ const translations: Record<Language, Record<string, string>> = {
     'step1.result.xiao.desc': 'Sort out your thoughts, throw again',
     'step1.result.yin.desc': 'The time is not right, pause briefly',
     'step1.noAttempts': 'No attempts left, please restart',
-    'step1.human.title': 'Please throw the cups to consult',
-    'step1.human.instruction': 'Sort out your thoughts and confirm your path forward',
+    'step1.human.title': 'Sort out your thoughts and confirm your path forward',
+    'step1.human.instruction': 'Please throw the cups to consult',
     'step1.human.attempts': 'Remaining chances',
     
     // Step 2: Shake

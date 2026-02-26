@@ -19,6 +19,7 @@
 - 🎨 **三种主题** - 紫色、金色、绿色主题切换
 - 🌐 **双语支持** - 中文/英文切换
 - 🎮 **像素风格** - 90年代掌机风格UI设计
+- 🤖 **AI 生成签文** - 基于大语言模型的智能签文生成，提供更多样化的积极肯定语
 
 ## 核心功能 | Core Features
 
@@ -144,6 +145,7 @@ A pixel-style fortune telling web application with three steps: throwing cups, s
 - 🌐 **Bilingual Support** - Chinese/English switching
 - 📱 **PWA Support** - Can be installed to phone home screen
 - 🎮 **Pixel Style** - 90s handheld game console style UI design
+- 🤖 **AI Generated Affirmations** - Intelligent affirmation generation based on large language models, providing more diverse positive affirmations
 
 ## Tech Stack
 
